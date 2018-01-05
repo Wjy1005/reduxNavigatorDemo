@@ -14,6 +14,7 @@ import Page from './view/Page'
 import PageTwo from './view/PageTwo'
 import PageThree from './view/PageThree'
 import PageFour from './view/PageFour'
+//import {components} from './Config'
 
 class setStackNavigator {
 
@@ -57,6 +58,7 @@ class setStackNavigator {
             }
         }
 
+        //添加路由列表,便于管理
         //this.data = this.addData(this.data, components)
 
         return this.data

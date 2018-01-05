@@ -109,32 +109,33 @@ const Navigator = StackNavigator(
     routes,
     {
         //设置导航全局样式
-        navigationOptions: ({ navigation,screenProps }) => (console.log('navigation', navigation), {
-            //返回键文字
-            headerBackTitle: null,
-            //是否显示图标，默认关闭
-            showIcon: true,
-            //是否允许在标签之间进行滑动
-            swipeEnabled: false,
-            //是否在更改标签时显示动画
-            animationEnabled: false,
-            headerStyle: {backgroundColor: 'red'},
-            //headerStyle: {backgroundColor:'red'},
-            //后退键
-            headerLeft: (
-                <TouchableOpacity onPress={()=>{navigation.goBack()}} style={{marginLeft:10}}>
-                    <Image source={require('./img/icon_return_white.png')}/>
-                </TouchableOpacity>
-            ),
-            //导航标题,如有是tab页则显示tab分页的标题
-            title: navigation.state.routes ? navigation.state.routes[navigation.state.index].routeName : navigation.state.routeName,
-            //文字样式
-            //Android中headerTitleStyle默认为alignSelf:'flex-start'
-            headerTitleStyle: {alignSelf: 'center'},
-            headerTintColor: '#fff',
-            //Android需要加上一個headerRight讓title居中
-            headerRight: <View style={{ width: 24 }}/>
-        }),
+        navigationOptions: ({ navigation,screenProps }) => (
+            console.log('navigation', navigation), {
+                //返回键文字
+                headerBackTitle: null,
+                //是否显示图标，默认关闭
+                showIcon: true,
+                //是否允许在标签之间进行滑动
+                swipeEnabled: false,
+                //是否在更改标签时显示动画
+                animationEnabled: false,
+                //导航背景色
+                headerStyle: {backgroundColor: 'red'},
+                //后退键
+                headerLeft: (
+                    <TouchableOpacity onPress={()=>{navigation.goBack()}} style={{marginLeft:10}}>
+                        <Image source={require('./img/icon_return_white.png')}/>
+                    </TouchableOpacity>
+                ),
+                //导航标题,如有是tab页则显示tab分页的标题
+                title: navigation.state.routes ? navigation.state.routes[navigation.state.index].routeName : navigation.state.routeName,
+                //文字样式
+                //Android中headerTitleStyle默认为alignSelf:'flex-start'
+                headerTitleStyle: {alignSelf: 'center'},
+                headerTintColor: '#fff',
+                //Android需要加上一個headerRight讓title居中,如果是首页(tab页)则不需要
+                headerRight: navigation.state.routes ? null : <View style={{ width: 24 }}/>
+            }),
         //定义跳转风格
         //card：使用iOS和安卓默认的风格
         //modal：iOS独有的使屏幕从底部画出。类似iOS的present效果
