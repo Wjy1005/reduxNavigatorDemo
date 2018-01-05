@@ -15,6 +15,15 @@ class Page extends React.Component {
         super(props, context);
     }
 
+    static navigationOptions = ({navigation,screenProps}) => ({
+        // 这里面的属性和App.js的navigationOptions是一样的。
+        headerStyle: {
+            backgroundColor: screenProps ?
+                screenProps.themeColor :
+                'blue'
+        }
+    })
+
     render() {
         return (
             <View style={styles.container}>

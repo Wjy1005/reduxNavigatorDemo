@@ -19,6 +19,8 @@ class AppIndex extends Component {
         console.log(this.props);
         return (
             <AppNavigator
+                //在此申明,后续页面中navigationOptions中可以引用到
+                screenProps={{themeColor:'yellow'}}
                 navigation={addNavigationHelpers({
                     dispatch: this.props.dispatch,
                     state: this.props.nav
