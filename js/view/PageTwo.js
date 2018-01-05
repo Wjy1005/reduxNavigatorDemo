@@ -8,15 +8,12 @@
 import React, {PropTypes} from 'react';
 import {View, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
 import {NavigationActions} from 'react-navigation'
-import PageTwo from './PageTwo'
+import PageThree from './PageThree'
+
 class Page extends React.Component {
     constructor(props, context) {
         super(props, context);
     }
-
-    static navigationOptions = ({ navigation, screenProps })=>({
-        headerRight: <View style={{ width: 24, height:44,backgroundColor:'blue' }}/>
-    })
 
     render() {
         return (
@@ -31,7 +28,7 @@ class Page extends React.Component {
     }
 
     _onPress = ()=> {
-        this.props.navigation.navigate('PageTwo', {name: PageTwo});
+        this.props.navigation.navigate('PageThree', {name: PageThree});
     }
 }
 

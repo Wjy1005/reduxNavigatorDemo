@@ -11,6 +11,9 @@ import {View, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
 import Main from './view/Main'
 import Deputy from './view/Deputy'
 import Page from './view/Page'
+import PageTwo from './view/PageTwo'
+import PageThree from './view/PageThree'
+import PageFour from './view/PageFour'
 
 class setStackNavigator {
 
@@ -42,8 +45,16 @@ class setStackNavigator {
             },
             Page: {
                 screen: Page
+            },
+            PageTwo: {
+                screen: PageTwo
+            },
+            PageThree: {
+                screen: PageThree
+            },
+            PageFour: {
+                screen: PageFour
             }
-
         }
 
         //this.data = this.addData(this.data, components)

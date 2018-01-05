@@ -12,16 +12,16 @@ import {createStore, bindActionCreators} from 'redux'
 import {connect} from 'react-redux';
 import Page from './Page'
 
-class Main extends
-React.Component
-{
-    constructor(props, context)
-    {
+class Main extends React.Component {
+    constructor(props, context) {
         super(props, context);
     }
 
-    render()
-    {
+    static navigationOptions = ({navigation,screenProps}) => ({
+        // 这里面的属性和Navigator.js的navigationOptions是一样的
+    })
+
+    render() {
         return (
             <View style={styles.container}>
                 <TouchableOpacity onPress={this._onPress}>
@@ -32,14 +32,13 @@ React.Component
         );
     }
 
-    _onPress = ()=>{
-        this.props.navigation.navigate('Page',{name:Page})
+    _onPress = ()=> {
+        this.props.navigation.navigate('Page', {name: Page})
     }
 
     componentDidMount() {
         console.log(this.props)
-        //this.props.addTodo('hello world!!')
-
+        this.props.addTodo('hello world!!')
     }
 }
 

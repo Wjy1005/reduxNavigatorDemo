@@ -14,14 +14,10 @@ class Page extends React.Component {
         super(props, context);
     }
 
-    static navigationOptions = ({ navigation, screenProps })=>({
-        headerRight: <View style={{ width: 24, height:44,backgroundColor:'blue' }}/>
-    })
-
     render() {
         return (
             <View style={styles.container}>
-                <Text onPress={this._onPress}>跳转到下一页</Text>
+                <Text onPress={this._onPress}>点击返回首页</Text>
             </View>
         );
     }
@@ -31,7 +27,15 @@ class Page extends React.Component {
     }
 
     _onPress = ()=> {
-        this.props.navigation.navigate('PageTwo', {name: PageTwo});
+        const resetAction = NavigationActions.reset({
+            index: 1,
+            actions: [
+                NavigationActions.navigate({routeName: 'Tab', params: { token: '123456' }}),
+                NavigationActions.navigate({routeName: 'Page', params: { token: '123456' }})
+            ]
+        });
+
+        this.props.navigation.dispatch(resetAction);
     }
 }
 

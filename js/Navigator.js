@@ -13,7 +13,7 @@ import {createStore, bindActionCreators} from 'redux'
 import {connect} from 'react-redux';
 import { addTodo, changeTodo } from './redux/Action/MainAction'
 import {StackNavigator,TabNavigator,TabBarBottom, DrawerNavigator, addNavigationHelpers}from 'react-navigation'
-//import CardStackStyleInterpolator from 'react-navigation/src/views/CardStackStyleInterpolator';
+import CardStackStyleInterpolator from 'react-navigation/lib-rn/views/CardStack/CardStackStyleInterpolator';
 
 import setStackNavigator from './NavigatorRoute'
 
@@ -32,21 +32,21 @@ class TabBarItem extends React.Component {
 
 let items = [
     {
-        component: 'Main',
+        component: '首页',
         text: '首页',
         screen: Main,
         normalImage: require('./img/main.png'),
         selectedImage: require('./img/main_select.png')
     },
     {
-        component: 'Deputy',
+        component: '副页',
         text: '副页',
         screen: Deputy,
         normalImage: require('./img/project.png'),
         selectedImage: require('./img/project_select.png')
-    },
-]
-let tabView = {}
+    }
+];
+let tabView = {};
 items.map((item, index)=> {
     tabView[item.component] = {
         screen: item.screen,
@@ -59,10 +59,15 @@ items.map((item, index)=> {
                     normalImage={item.normalImage}
                     selectedImage={item.selectedImage}
                 />
-            )
-        }),
+            ),
+            tabBarOnPress: (status)=> {
+                console.log(status)
+                console.log(navigation)
+                navigation.navigate(status.scene.route.routeName, {name: status.scene.route.routeName})
+            }
+        })
     }
-})
+});
 //底部tab
 let Tab = TabNavigator(
     tabView,
@@ -80,11 +85,12 @@ let Tab = TabNavigator(
             labelStyle: {
                 fontSize: 14, // 文字大小
             },
-        }
+        },
+
     }
 );
 
-let route = setStackNavigator.set()
+let route = setStackNavigator.set();
 let routes = {
     Tab: {
         screen: Tab,
@@ -97,12 +103,13 @@ let routes = {
             //header:null,
         })
     }, ...route
-}
+};
+
 const Navigator = StackNavigator(
     routes,
     {
         //设置导航全局样式
-        navigationOptions: ({ navigation,screenProps }) => ({
+        navigationOptions: ({ navigation,screenProps }) => (console.log('navigation', navigation), {
             //返回键文字
             headerBackTitle: null,
             //是否显示图标，默认关闭
@@ -112,35 +119,35 @@ const Navigator = StackNavigator(
             //是否在更改标签时显示动画
             animationEnabled: false,
             headerStyle: {backgroundColor: 'red'},
-            //headerStyle:{backgroundColor:'red'},
+            //headerStyle: {backgroundColor:'red'},
             //后退键
-            //headerLeft: (
-            //    <TouchableOpacity onPress={()=>{navigation.goBack()}} style={{marginLeft:10}}>
-            //        <Image source={require('./img/icon_return_white.png')}/>
-            //    </TouchableOpacity>
-            //),
+            headerLeft: (
+                <TouchableOpacity onPress={()=>{navigation.goBack()}} style={{marginLeft:10}}>
+                    <Image source={require('./img/icon_return_white.png')}/>
+                </TouchableOpacity>
+            ),
+            //导航标题,如有是tab页则显示tab分页的标题
+            title: navigation.state.routes ? navigation.state.routes[navigation.state.index].routeName : navigation.state.routeName,
             //文字样式
             //Android中headerTitleStyle默认为alignSelf:'flex-start'
             headerTitleStyle: {alignSelf: 'center'},
             headerTintColor: '#fff',
             //Android需要加上一個headerRight讓title居中
-            //headerRight: <View style={{ width: 24 }}/>
+            headerRight: <View style={{ width: 24 }}/>
         }),
         //定义跳转风格
         //card：使用iOS和安卓默认的风格
         //modal：iOS独有的使屏幕从底部画出。类似iOS的present效果
         mode: 'card',
         //控制安卓切换页面动作,跟IOS保持一致
-        //transitionConfig: ()=>({
-        //screenInterpolator: CardStackStyleInterpolator.forHorizontal,
-        //})
+        transitionConfig: ()=>({
+            screenInterpolator: CardStackStyleInterpolator.forHorizontal,
+        })
         //导航切换事件
         //onNavigationStateChange: (event)=>{
         //    console.log(event)
         //},
     }
-)
-
+);
 
 export default Navigator;
-
