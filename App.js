@@ -5,9 +5,10 @@
  */
 
 import React, { Component } from 'react';
+import {BackHandler, ToastAndroid, Platform} from 'react-native'
 import { Provider, connect } from 'react-redux'
 import AppNavigator from './js/Navigator'
-import { addNavigationHelpers } from "react-navigation";
+import { addNavigationHelpers, NavigationActions } from "react-navigation";
 import createStore from './js/redux/store/createStore'
 
 const mapStateToProps = (state) => ({
@@ -28,6 +29,32 @@ class AppIndex extends Component {
             />
         );
     }
+
+    //监听安卓物理后退键
+    componentDidMount() {
+        BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
+    }
+
+    onBackPress = () => {
+        const { dispatch, nav } = this.props;
+        if (nav.index === 0) {
+            let now = new Date().getTime();
+            if (this.lastBackPressed && now - this.lastBackPressed < 2500) {
+                return false;
+            }
+            this.lastBackPressed = now;
+            ToastAndroid.show('再点击一次退出应用', ToastAndroid.SHORT);
+            return true;
+        }
+        console.log(this.props);
+        dispatch(NavigationActions.back());
+
+        return true;
+    };
 }
 
 const AppWithNavigationState = connect(mapStateToProps)(AppIndex);
@@ -35,9 +62,11 @@ const AppWithNavigationState = connect(mapStateToProps)(AppIndex);
 const store = createStore();
 export default class App extends Component<{}> {
     render() {
+        const prefix = Platform.OS == 'android' ? 'reduxNavigatorDemo://reduxNavigatorDemo/' : 'reduxNavigatorDemo://';
+
         return (
             <Provider store={store}>
-                <AppWithNavigationState/>
+                <AppWithNavigationState   uriPrefix={prefix}/>
             </Provider>
         );
     }

@@ -45,7 +45,8 @@ class setStackNavigator {
                 //navigationOptions:null
             },
             Page: {
-                screen: Page
+                screen: Page,
+                path: 'chat/:Page',
             },
             PageTwo: {
                 screen: PageTwo
