@@ -15,7 +15,13 @@ class Page extends React.Component {
     }
 
     static navigationOptions = ({ navigation, screenProps })=>({
-        headerRight: <View style={{ width: 24, height:44,backgroundColor:'blue' }}/>
+        headerRight: (
+            <TouchableOpacity
+                onPress={()=>{navigation.state.params.onRightButtonPress && navigation.state.params.onRightButtonPress() } }
+                style={{marginRight:10}}>
+                <Text>右边按钮</Text>
+            </TouchableOpacity>
+        )
     })
 
     render() {
@@ -32,6 +38,18 @@ class Page extends React.Component {
 
     _onPress = ()=> {
         this.props.navigation.navigate('PageTwo', {name: PageTwo});
+    }
+
+    onRightButtonPress = ()=>{
+        console.log(this.props.navigation);
+        console.log('page1  点击了右键');
+    }
+    componentWillMount() {
+        console.log(this.props.navigation)
+        //为右键添加事件
+        this.props.navigation.setParams({
+            onRightButtonPress:this.onRightButtonPress,
+        })
     }
 }
 
