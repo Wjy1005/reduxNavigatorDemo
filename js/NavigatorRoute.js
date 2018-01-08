@@ -46,10 +46,11 @@ class setStackNavigator {
             },
             Page: {
                 screen: Page,
-                path: 'chat/:Page',
+                path: 'app/:Page'
             },
             PageTwo: {
-                screen: PageTwo
+                screen: PageTwo,
+                path: 'Main/:pageTwo'
             },
             PageThree: {
                 screen: PageThree

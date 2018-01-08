@@ -17,7 +17,8 @@ class Page extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text onPress={this._onPress}>点击返回首页</Text>
+                <Text onPress={this._onPress}>点击返回第一页</Text>
+                <Text onPress={this._onClick}>点击返回首页</Text>
             </View>
         );
     }
@@ -32,6 +33,17 @@ class Page extends React.Component {
             actions: [
                 NavigationActions.navigate({routeName: 'Tab', params: { token: '123456' }}),
                 NavigationActions.navigate({routeName: 'Page', params: { token: '123456' }})
+            ]
+        });
+
+        this.props.navigation.dispatch(resetAction);
+    }
+
+    _onClick = ()=> {
+        const resetAction = NavigationActions.reset({
+            index: 0,
+            actions: [
+                NavigationActions.navigate({routeName: 'Tab', params: { token: '123456' }}),
             ]
         });
 
