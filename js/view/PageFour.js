@@ -9,6 +9,10 @@ import React, {PropTypes} from 'react';
 import {View, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
 import {NavigationActions} from 'react-navigation'
 import PageTwo from './PageTwo'
+import {bindActionCreators} from "redux";
+import {addTodo, changeTodo} from "../redux/Action/MainAction";
+import connect from "react-redux/es/connect/connect";
+
 class Page extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -24,28 +28,28 @@ class Page extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.routes)
+        console.log(this.props.routes);
+        console.log(NavigationActions);
+        console.log(this.props.navigation);
     }
 
-    _onPress = ()=> {
-        const resetAction = NavigationActions.reset({
-            index: 1,
-            actions: [
-                NavigationActions.navigate({routeName: 'Tab', params: { token: '123456' }}),
-                NavigationActions.navigate({routeName: 'Page', params: { token: '123456' }})
-            ]
-        });
+    _onPress = () => {
+        const resetAction = this.props.navigation.reset(
+            [
+                NavigationActions.navigate({routeName: 'Tab', params: {token: '123456'}}),
+                NavigationActions.navigate({routeName: 'Page', params: {token: '123456'}})
+            ], 1
+        );
 
         this.props.navigation.dispatch(resetAction);
     }
 
-    _onClick = ()=> {
-        const resetAction = NavigationActions.reset({
-            index: 0,
-            actions: [
-                NavigationActions.navigate({routeName: 'Tab', params: { token: '123456' }}),
-            ]
-        });
+    _onClick = () => {
+        const resetAction = this.props.navigation.reset(
+            [
+                NavigationActions.navigate({routeName: 'Tab', params: {token: '123456'}}),
+            ], 0
+        );
 
         this.props.navigation.dispatch(resetAction);
     }
@@ -58,3 +62,4 @@ const styles = StyleSheet.create({
 });
 
 export default Page;
+

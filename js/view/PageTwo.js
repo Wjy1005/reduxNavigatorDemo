@@ -15,7 +15,7 @@ class Page extends React.Component {
         super(props, context);
     }
 
-    static navigationOptions = ({navigation,screenProps}) => ({
+    static navigationOptions = ({navigation, screenProps}) => ({
         // 这里面的属性和App.js的navigationOptions是一样的。
         headerStyle: {
             backgroundColor: screenProps ?
@@ -36,7 +36,7 @@ class Page extends React.Component {
         console.log(this.props.routes)
     }
 
-    _onPress = ()=> {
+    _onPress = () => {
         this.props.navigation.navigate('PageThree', {name: PageThree});
     }
 }

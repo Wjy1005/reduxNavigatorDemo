@@ -12,8 +12,9 @@ import {View, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
 import {createStore, bindActionCreators} from 'redux'
 import {connect} from 'react-redux';
 import { addTodo, changeTodo } from './redux/Action/MainAction'
-import {StackNavigator,TabNavigator,TabBarBottom, DrawerNavigator, addNavigationHelpers}from 'react-navigation'
-import CardStackStyleInterpolator from 'react-navigation/lib-rn/views/CardStack/CardStackStyleInterpolator';
+import {StackNavigator,TabNavigator,TabBarBottom, DrawerNavigator}from 'react-navigation'
+// import CardStackStyleInterpolator from 'react-navigation/lib-rn/views/CardStack/CardStackStyleInterpolator';
+// import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 
 import setStackNavigator from './NavigatorRoute'
 
@@ -142,7 +143,7 @@ const Navigator = StackNavigator(
         mode: 'card',
         //控制安卓切换页面动作,跟IOS保持一致
         transitionConfig: ()=>({
-            screenInterpolator: CardStackStyleInterpolator.forHorizontal,
+            // screenInterpolator: CardStackStyleInterpolator.forHorizontal,
         })
         //导航切换事件
         //onNavigationStateChange: (event)=>{

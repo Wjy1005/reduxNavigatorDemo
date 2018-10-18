@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import {BackHandler, ToastAndroid, Platform} from 'react-native'
 import { Provider, connect } from 'react-redux'
 import AppNavigator from './js/Navigator'
-import { addNavigationHelpers, NavigationActions } from "react-navigation";
+import {  NavigationActions } from "react-navigation";
 import createStore from './js/redux/store/createStore'
 
 const mapStateToProps = (state) => ({
@@ -22,10 +22,10 @@ class AppIndex extends Component {
             <AppNavigator
                 //在此申明,后续页面中navigationOptions中可以引用到
                 screenProps={{themeColor:'yellow'}}
-                navigation={addNavigationHelpers({
-                    dispatch: this.props.dispatch,
-                    state: this.props.nav
-                })}
+                // navigation={addNavigationHelpers({
+                //     dispatch: this.props.dispatch,
+                //     state: this.props.nav
+                // })}
             />
         );
     }
