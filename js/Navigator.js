@@ -29,6 +29,7 @@ class TabBarItem extends React.Component {
             />
         )
     }
+    
 }
 
 let items = [
